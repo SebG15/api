@@ -4,7 +4,7 @@ import { MongoClient,ObjectId } from 'mongodb';
 import Cors from 'cors';
 
 
-const stringbaseDeDatos= "mongodb+srv://adminxxxx:admin@proyectoweb.dxe47.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+const stringbaseDeDatos= "" // aqui va la url de mongo
 const client = new MongoClient(stringbaseDeDatos,{
     useNewUrlParser: true,
     useUnifiedTopology: true,
