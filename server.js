@@ -4,7 +4,7 @@ import { MongoClient,ObjectId } from 'mongodb';
 import Cors from 'cors';
 
 
-const stringbaseDeDatos= "mongodb+srv://admin:admin@proyectoweb.dxe47.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+const stringbaseDeDatos= "mongodb+srv://adminxxxx:admin@proyectoweb.dxe47.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 const client = new MongoClient(stringbaseDeDatos,{
     useNewUrlParser: true,
     useUnifiedTopology: true,
