@@ -4,7 +4,7 @@ import { MongoClient,ObjectId } from 'mongodb';
 import Cors from 'cors';
 
 
-const stringbaseDeDatos= "" // aqui va la url de mongo
+const stringbaseDeDatos="mongodb+srv://seb:seb@cluster0.dxe47.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 const client = new MongoClient(stringbaseDeDatos,{
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -67,36 +67,39 @@ app.post("/productos/nuevo",(req,res)=>{
     
 });
 
+
+
 app.patch('/productos/editar',(req,res)=>{
-    const edicion = req.body;
+    const edicion =req.body;
     console.log(edicion);
-    const filtroProducto ={ _id: new ObjectId (edicion.id)};
+    const filtroProducto={_id:new ObjectId(edicion.id)}
     delete edicion.id;
-    const operacion = {
+    const operacion={
         $set:edicion,
-    };
-    baseDeDatos
-    .collection('producto').findOneAndUpdate(filtroProducto,operacion,{upsert:true, returnOriginal:true},(err, result)=>{
-        if (err){
-            console.error("Error en la actualizacioón",err);
+    }
+    baseDeDatos.collection('producto').findOneAndUpdate(filtroProducto,operacion,{upsert:true, returnOriginal:true},(err,result)=>{
+        if(err){
+            console.error("Error actualizando producto",err);
             res.sendStatus(500);
         }
-        else{
-            console.log("Actualizacion exitosa");
-            res.status(200);
+        else {
+            console.log("Producto Actualizado");
+            res.sendStatus(200);
         }
+
     });
-})
+});
 
 const main = ()=>{
     client.connect((err,db)=>{
         if(err){
-            console.error("Error coenctando");
+            console.error("Error conectando a la BD");
             return "Error";
         }
         baseDeDatos =db.db('Andromeda');
         console.log("Conexión exitosa!")
         return app.listen(5000,()=>{
+            console.log('escuchando puerto 5000');
             
         
         });
