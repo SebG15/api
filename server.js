@@ -4,7 +4,7 @@ import { MongoClient,ObjectId } from 'mongodb';
 import Cors from 'cors';
 
 
-const stringbaseDeDatos="mongodb+srv://seb:seb@cluster0.dxe47.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const stringbaseDeDatos=""//link  mongo
 const client = new MongoClient(stringbaseDeDatos,{
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -67,7 +67,20 @@ app.post("/productos/nuevo",(req,res)=>{
     
 });
 
+app.delete("/productos/eliminar",(req,res)=>{
+    
+    const filtroProducto={_id:new ObjectId(req.body.id)};
+    baseDeDatos.collection('producto').deleteOne(filtroProducto,(err,result)=>{
+        if(err){
+            console.err(err);
+            res.sendStatus(500);
+        }
+        else{
+            res.sendStatus(200);
+        }
 
+    });
+});
 
 app.patch('/productos/editar',(req,res)=>{
     const edicion =req.body;
